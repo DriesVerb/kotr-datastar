@@ -1,0 +1,13 @@
+ktor:
+  development: true
+  deployment:
+    port: 8080
+    watch:
+      - com.example
+      - classes
+      - resources
+  application:
+    modules:
+      - com.example.home.HomeRoutingKt.configureHomeRouting
+      - com.example.html.HtmlRoutingKt.configureHtmlRouting
+      - com.example.static.StaticRoutingKt.configureStaticRouting

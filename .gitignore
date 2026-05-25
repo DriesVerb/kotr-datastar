@@ -1,0 +1,27 @@
+# Gradle
+.gradle/
+agent/
+build/
+out/
+
+# Kotlin
+.kotlin/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local configuration
+local.properties
+
+# Secrets
+.env
