@@ -70,6 +70,17 @@ fun FlowContent.pokemonDetail(pokemon: com.example.pokemon.PokemonResponse?) {
     div("p-8") {
         if (pokemon != null) {
             h1("text-5xl font-bold capitalize mb-4") { +pokemon.name }
+            div("hover-3d") {
+                figure("w-20  rounded-2xl") {
+                    img(
+                        src = pokemon.sprites.other.officialArtwork.frontDefault,
+                        alt = "this is an image of ${pokemon.name}",
+                    )
+                }
+                for (n in 1..8) {
+                    div {}
+                }
+            }
             div("grid grid-cols-2 gap-4 max-w-md") {
                 div("stats shadow bg-slate-800") {
                     div("stat") {
@@ -102,6 +113,7 @@ fun FlowContent.pokemonDetail(pokemon: com.example.pokemon.PokemonResponse?) {
         }
     }
 }
+
 fun UL.linkedAnchor(
     link: String,
     label: String,
