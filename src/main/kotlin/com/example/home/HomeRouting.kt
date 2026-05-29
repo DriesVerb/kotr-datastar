@@ -8,7 +8,7 @@ import io.ktor.server.routing.routing
 
 fun Application.configureHomeRouting() {
     routing {
-        get("/") {
+        get("/pokemon") {
             call.respondText("Hello, World!")
         }
     }

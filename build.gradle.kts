@@ -1,6 +1,7 @@
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
     alias(ktorLibs.plugins.ktor)
     alias(libs.plugins.ktlint)
 }
@@ -12,6 +13,10 @@ application {
     mainClass = "io.ktor.server.netty.EngineMain"
 }
 
+tasks.withType<JavaExec> {
+    systemProperty("io.ktor.development", "true")
+}
+
 kotlin {
     jvmToolchain(21)
 }
@@ -20,7 +25,14 @@ dependencies {
     implementation(ktorLibs.server.core)
     implementation(ktorLibs.server.htmlBuilder)
     implementation(ktorLibs.server.netty)
+
+    implementation(ktorLibs.client.core)
+    implementation(ktorLibs.client.cio)
+    implementation(ktorLibs.client.contentNegotiation)
+    implementation(ktorLibs.serialization.kotlinx.json)
+
     implementation(libs.kotlinx.kotlinxHtml)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.logback.classic)
 
     testImplementation(kotlin("test"))
