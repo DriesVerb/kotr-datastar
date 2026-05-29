@@ -10,4 +10,3 @@ ktor:
     modules:
       - com.example.home.HomeRoutingKt.configureHomeRouting
       - com.example.html.HtmlRoutingKt.configureHtmlRouting
-      - com.example.static.StaticRoutingKt.configureStaticRouting

@@ -12,7 +12,9 @@ fun Application.configureHtmlRouting() {
         get("/html-dsl") {
             call.respondHtml {
                 head {
-                    link(rel = "stylesheet", href = "/static/main.css")
+                    script {
+                        src = "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+                    }
                     script {
                         type = "module"
                         src = "https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.1/bundles/datastar.js"
@@ -38,7 +40,8 @@ fun Application.configureHtmlRouting() {
                         }
                     }
                     button {
-                        classes = setOf("bg-blue-600", "hover:bg-blue-700", "px-4", "py-2", "rounded-lg", "transition-colors")
+                        classes =
+                            setOf("bg-blue-600", "hover:bg-blue-700", "px-4", "py-2", "rounded-lg", "transition-colors")
                         attributes["data-on:click"] = "alert('hello')"
                         +"see an alert"
                     }
