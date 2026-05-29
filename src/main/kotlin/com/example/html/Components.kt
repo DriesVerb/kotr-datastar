@@ -37,9 +37,71 @@ fun FlowContent.navbar(
     }
 }
 
-/**
- * Use 'UL' as the receiver so that 'li' is available.
- */
+fun HTML.defaultHeader(
+    pageTitle: String,
+    block: HEAD.() -> Unit = {},
+) {
+    attributes["data-theme"] = "dark"
+    head {
+        defaultResources()
+        title {
+            +pageTitle
+        }
+        block()
+    }
+}
+
+fun HEAD.defaultResources() {
+    link {
+        href = "https://cdn.jsdelivr.net/npm/daisyui@5"
+        rel = "stylesheet"
+        type = "text/css"
+    }
+    script {
+        src = "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+    }
+    script {
+        type = "module"
+        src = "https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.1/bundles/datastar.js"
+    }
+}
+
+fun FlowContent.pokemonDetail(pokemon: com.example.pokemon.PokemonResponse?) {
+    div("p-8") {
+        if (pokemon != null) {
+            h1("text-5xl font-bold capitalize mb-4") { +pokemon.name }
+            div("grid grid-cols-2 gap-4 max-w-md") {
+                div("stats shadow bg-slate-800") {
+                    div("stat") {
+                        div("stat-title text-slate-400") { +"Height" }
+                        div("stat-value text-blue-400") { +"${pokemon.height}" }
+                    }
+                }
+                div("stats shadow bg-slate-800") {
+                    div("stat") {
+                        div("stat-title text-slate-400") { +"Weight" }
+                        div("stat-value text-green-400") { +"${pokemon.weight}" }
+                    }
+                }
+            }
+            div("mt-6") {
+                h2("text-2xl font-semibold mb-2") { +"Types" }
+                div("flex gap-2") {
+                    pokemon.types.forEach { typeSlot ->
+                        span("badge badge-primary badge-lg capitalize") {
+                            +typeSlot.type.name
+                        }
+                    }
+                }
+            }
+        } else {
+            h1("text-4xl text-red-500") { +"Pokemon not found!" }
+            a(href = "/pokemon/pikachu", classes = "btn btn-outline mt-4") {
+                +"Try Pikachu"
+            }
+        }
+    }
+}
 fun UL.linkedAnchor(
     link: String,
     label: String,

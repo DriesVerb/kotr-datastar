@@ -14,7 +14,8 @@ data class PokemonResponse(
     val name: String,
     val height: Int,
     val weight: Int,
-    val types: List<TypeSlot>
+    val types: List<TypeSlot>,
+    val sprites: Sprites
 )
 
 @Serializable
@@ -28,6 +29,26 @@ data class TypeInfo(
     val name: String,
     val url: String
 )
+
+@Serializable
+data class Sprites(
+    val other: OtherSprites
+)
+
+@Serializable
+data class OtherSprites(
+    @SerialName("official-artwork")
+    val officialArtwork: OfficialArtwork
+)
+
+@Serializable
+data class OfficialArtwork(
+    @SerialName("front_default")
+    val frontDefault: String,
+    @SerialName("front_shiny")
+    val frontShiny: String
+)
+
 
 class PokemonClient {
     private val client = HttpClient(CIO) {
