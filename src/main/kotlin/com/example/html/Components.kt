@@ -1,5 +1,6 @@
 package com.example.html
 
+import com.example.pokemon.PokemonResponse
 import kotlinx.html.*
 
 data class NavItem(
@@ -70,11 +71,11 @@ fun FlowContent.pokemonDetail(pokemon: com.example.pokemon.PokemonResponse?) {
     div("p-8") {
         if (pokemon != null) {
             h1("text-5xl font-bold capitalize mb-4") { +pokemon.name }
-            div("hover-3d") {
-                figure("w-20  rounded-2xl") {
-                    img(
-                        src = pokemon.sprites.other.officialArtwork.frontDefault,
-                        alt = "this is an image of ${pokemon.name}",
+            div("hover-3d mb-8") {
+                figure("w-64 rounded-2xl shadow-2xl") {
+                    swapImage(
+                        image1 = pokemon.sprites.other.officialArtwork.frontDefault,
+                        image2 = pokemon.sprites.other.officialArtwork.frontShiny,
                     )
                 }
                 for (n in 1..8) {
@@ -111,6 +112,27 @@ fun FlowContent.pokemonDetail(pokemon: com.example.pokemon.PokemonResponse?) {
                 +"Try Pikachu"
             }
         }
+    }
+}
+
+fun FlowContent.swapImage(
+    image1: String,
+    image2: String,
+) {
+    label("swap swap-rotate") {
+        input {
+            type = InputType.checkBox
+        }
+        img(
+            src = image1,
+            alt = "Normal",
+            classes = "swap-off w-full h-auto",
+        )
+        img(
+            src = image2,
+            alt = "Shiny",
+            classes = "swap-on w-full h-auto",
+        )
     }
 }
 
